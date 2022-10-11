@@ -1,0 +1,26 @@
+stages:
+  prepare:
+    cmd: python C:/Users/apollo.callero/dvc_test/dvc-test/code/src/prepare.py  data/data.xml
+    deps:
+    - C:/Users/apollo.callero/dvc_test/dvc-test/code/src/prepare.py
+    - data/data.xml
+    params:
+    - prepare.seed
+    - prepare.split
+    outs:
+    - data/prepared
+  train:
+    cmd: python src/train.py
+    deps:
+    - data
+    - src
+    params:
+    - params.yaml:
+    outs:
+    - models
+    metrics:
+    - metrics.json:
+        cache: false
+    plots:
+    - plots:
+        cache: false
